@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a2dd180f403b2664fafb2185335fa209
+timeCreated: 1467064904
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - pliersObject: {fileID: 114382, guid: 7d0bfcf7bbc6b3a4d8c52dd4820e7c7e, type: 2}
+  - bombObject: {fileID: 121338, guid: 302146cbe012a994b8ed319789a65ae7, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
