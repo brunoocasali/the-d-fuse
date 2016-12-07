@@ -7,16 +7,18 @@ public class OpeningLevelHandler : MonoBehaviour {
 	public MovieTexture movie;
 
 	void Start(){
+		movie.Play();
 	}
 
 	void Update() {
-		if (Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp (KeyCode.KeypadEnter) && movie.isPlaying) {
-			SceneManager.LoadScene("Menu");
+		if (!movie.isPlaying || (Input.GetKeyUp (KeyCode.Escape) || Input.GetKeyUp (KeyCode.KeypadEnter))) {
+			SceneManager.LoadScene ("InitialMenu");
 		}
 	}
 
 	void OnGUI() {
-		movie.Play();
-		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), movie, ScaleMode.StretchToFill, false, 0.0f);
+		var rect = new Rect (0, 0, Screen.width, Screen.height);
+
+		GUI.DrawTexture(rect, movie, ScaleMode.StretchToFill, false, 0.0f);
 	}
 }
