@@ -18,7 +18,7 @@ public class BombScript : MonoBehaviour
 
 		if (canDefuse && Input.GetKeyDown (KeyCode.E)) {
 			//beep.Play ();
-			SceneManager.LoadScene ("MenuWin");
+			SceneManager.LoadScene ("YouWin");
 		}
 	}
 

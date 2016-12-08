@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
 	public GameObject prefabBomb;
-	public Text mostrador;
-
-	public float timeRemaining = 120f;
 
 	void Start ()
 	{
-		InvokeRepeating ("decreaseTimeRemaining", 1.0f, 1.0f);
-
 		GameObject[] doors = GameObject.FindGameObjectsWithTag ("PortaSala");
 
 		foreach (GameObject obj in doors) {
@@ -30,15 +23,5 @@ public class GameControllerScript : MonoBehaviour
 
 	void Update ()
 	{
-		if (timeRemaining == 0.0f) {
-			SceneManager.LoadScene ("Menu");
-		}
-
-		mostrador.text = timeRemaining.ToString ("## 'seg'");
-	}
-
-	void decreaseTimeRemaining ()
-	{
-		timeRemaining--;
 	}
 }
