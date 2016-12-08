@@ -11,7 +11,7 @@ public class PlayerInputController : MonoBehaviour {
 	private static ControllerKind kind = ControllerKind.ArrowKeys;
 	// private static VoiceRecognition recognition = new VoiceRecognition();
 
-	public static Vector2 TranslateMove() 
+	public static Vector2 TranslateMove()
 	{
 		if (kind == ControllerKind.ArrowKeys)
 			return ArrowsMove ();
@@ -25,12 +25,16 @@ public class PlayerInputController : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			input = Vector2.up;
+			SendAsyncMessage.Send(input);
 		} else if (Input.GetKeyDown(KeyCode.DownArrow)) {
 			input = Vector2.down;
+			SendAsyncMessage.Send(input);
 		} else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			input = Vector2.left;
+			SendAsyncMessage.Send(input);
 		} else if (Input.GetKeyDown(KeyCode.RightArrow)) {
 			input = Vector2.right;
+			SendAsyncMessage.Send(input);
 		}
 
 		return input;
