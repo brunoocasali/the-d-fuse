@@ -12,9 +12,8 @@ public class TimerScript : MonoBehaviour {
 	public AudioClip clip3;
 	public AudioClip clip1;
 	public AudioClip clipEnding;
-
+	public GameObject player;
 	public AudioClip[] progressMessages;
-
 	public float timeRemaining = 600f;
 
 	private bool alreadyPlayed = false;
@@ -39,7 +38,7 @@ public class TimerScript : MonoBehaviour {
 
 		if (comparison(10, minutes))
 			callAudioMessage (clip10);
-		else if (comparison(8, minutes))
+		else if (comparison(5, minutes))
 			callAudioMessage (clip5);
 		else if (comparison(3, minutes))
 			callAudioMessage (clip3);
@@ -53,7 +52,8 @@ public class TimerScript : MonoBehaviour {
 
 	void callAudioMessage(AudioClip clip)
 	{
-		AudioSource.PlayClipAtPoint (clip, Camera.main.transform.position);
+		var radio = GameObject.FindGameObjectWithTag ("Radio");
+		AudioSource.PlayClipAtPoint (clip, radio.transform.position);
 	}
 
 	bool comparison(int current, int minutes)

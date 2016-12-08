@@ -1,32 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using System.Text.RegularExpressions;
+using System.Linq;
 
-public class VoiceRecognition : MonoBehaviour
+public class VoiceRecognition
 {
-//	private VoiceRec.VoiceClass obj;
-//	private string word;
-//
-//	public Text text;
-//
-//	void Start () {
-//		obj = new VoiceRec.VoiceClass();
-//		//set of commands : replace with set of commands to be recognized
-//		string[] str = { "to the left", "to the right", "down", "up", "direita", "hello", "oh my gosh" };
-//		obj.initRecog(str);
-//	}
-//
-//	void Update () {
-//		word = obj.getWord();
-//
-//		if (word != null && word != "")
-//		{
-//			puts(word);
-//		}
-//	}
-//
-//	void puts (string message) {
-//		text.text = message;
-//	}
+	private VoiceRec.VoiceClass recognizer;
+	private string word;
+	private string[] left = { "left", "esquerda", "esquerdo" };
+	private string[] right = { "direita", "direito", "right" };
+	private string[] down = { "down", "trás", "baixo" };
+	private string[] up = { "up",  "frente",  "cima" };
+
+	public VoiceRecognition() 
+	{
+		recognizer = new VoiceRec.VoiceClass();
+		recognizer.initRecog(left.Concat(right).Concat(down).Concat(up).ToArray());
+	}
+
+	public Vector2 VoiceMove()
+	{
+		word = recognizer.getWord();
+
+		if (word != null && word != "")
+			if (createPattern (up).IsMatch (word))
+				return Vector2.up;
+			else if (createPattern (down).IsMatch (word))
+				return Vector2.down;
+			else if (createPattern (right).IsMatch (word))
+				return Vector2.right;
+			else if (createPattern (left).IsMatch (word))
+				return Vector2.left;
+			else
+				return Vector2.zero;
+		else
+			return Vector2.zero;
+	}
+
+	private Regex createPattern(string[] words)
+	{
+		string[] escapedWords = words.Select(w => @"\b" + Regex.Escape(w) + @"\b").ToArray();
+		return new Regex("(" + string.Join(")|(", escapedWords) + ")");
+	}
 }
