@@ -15,13 +15,15 @@ public class VoiceRecognition
 
 	public VoiceRecognition() 
 	{
-		recognizer = new VoiceRec.VoiceClass();
-		recognizer.initRecog(left.Concat(right).Concat(down).Concat(up).ToArray());
+		this.recognizer = new VoiceRec.VoiceClass();
+		string[] str = left.Concat(right).Concat(down).Concat(up).ToArray();
+
+		this.recognizer.initRecog(str);
 	}
 
 	public Vector2 VoiceMove()
 	{
-		word = recognizer.getWord();
+		word = this.recognizer.getWord();
 
 		if (word != null && word != "")
 			if (createPattern (up).IsMatch (word))
