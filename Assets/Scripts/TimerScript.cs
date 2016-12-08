@@ -44,6 +44,8 @@ public class TimerScript : MonoBehaviour {
 			callAudioMessage (clip3);
 		else if (comparison(1, minutes))
 			callAudioMessage (clip1);
+		else if (comparison(2, minutes) || comparison(6, minutes) || comparison(7, minutes) || comparison(8, minutes))
+			callAudioMessage (progressMessages[Random.Range(0, progressMessages.Length)]);
 		else if (comparison(0, minutes))
 			callAudioMessage (clipEnding);
 

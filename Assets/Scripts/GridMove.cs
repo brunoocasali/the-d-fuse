@@ -22,7 +22,7 @@ class GridMove : MonoBehaviour {
 	private float factor;
 
 	public void Update() {
-		if (!isMoving && Input.anyKeyDown) {
+		if (!isMoving) {
 			input = PlayerInputController.TranslateMove ();
 				// new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 

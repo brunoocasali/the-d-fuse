@@ -21,7 +21,7 @@ public class PlayerInputController : MonoBehaviour {
 
 	private static Vector2 ArrowsMove()
 	{
-		Vector2 input = Vector2.up;
+		Vector2 input = Vector2.zero;
 
 		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			input = Vector2.up;

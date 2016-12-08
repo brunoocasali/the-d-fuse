@@ -4,20 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class BombScript : MonoBehaviour
 {
-	public AudioSource beep;
+	public AudioClip beep;
+	public AudioClip found;
+	private bool foundBomb = false;
 	private bool canDefuse;
-
-	void Start ()
-	{
-		beep = GetComponent<AudioSource> ();
-	}
 
 	void Update ()
 	{
 		float time = Time.deltaTime;
 
-		if (canDefuse && Input.GetKeyDown (KeyCode.E)) {
-			//beep.Play ();
+		if (canDefuse && Input.GetKey (KeyCode.E)) {
+//			AudioSource.PlayClipAtPoint(beep, transform.position);
+
 			SceneManager.LoadScene ("YouWin");
 		}
 	}
@@ -25,6 +23,9 @@ public class BombScript : MonoBehaviour
 	void OnTriggerEnter (Collider col)
 	{
 		if (col.gameObject.CompareTag ("Player")) {
+			if(!foundBomb) AudioSource.PlayClipAtPoint(found, transform.position);
+
+			foundBomb = true;
 			canDefuse = defuseBomb (true);
 		}
 	}

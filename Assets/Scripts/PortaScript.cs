@@ -21,9 +21,7 @@ public class PortaScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
 		if (Input.GetKey (KeyCode.E)) {
-
 			if (!aberta && podeAbrir) {
 				aberta = true;
 				anim.SetBool ("Aberta", true);
