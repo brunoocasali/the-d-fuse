@@ -8,46 +8,43 @@ public class NarrativeHandler : MonoBehaviour {
 
 	public AudioClip[] AudioClipList;
 	private AudioSource source;
-	private bool initialized = false;
 	private int IndexCount = 0;
 
 	void Start()
 	{
 		source = Camera.main.GetComponent<AudioSource>();
 
-		StartCoroutine(WaitCoroutine.Do(1.0f, FirstMessage));
-
-		initialized = true;
+//		StartCoroutine(WaitCoroutine.Do(1.0f, playMessage));
 	}
 	
 	void Update()
 	{
-		if (initialized && Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.R))
+		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.R))
 		{
-			var first = AudioClipList.FirstOrDefault(item => item != null);
-			var hasMore = AudioClipList.Any(item => item != null);
-			Debug.Log (hasMore);
-
-			if (first != null) {
-				IndexCount += 1;
-
-				source.Stop ();
-				AudioClipList[IndexCount] = null;
-
-				SendToAudioSource (first);
-			}
-
-			if (!hasMore){
-				Initialize ();
-			}
+			playMessage ();
+		} 
+		else if (!source.isPlaying)
+		{
+			playMessage();
 		}
 	}
 
-	void FirstMessage()
+	void playMessage()
 	{
-		var clip = AudioClipList [IndexCount];
-		SendToAudioSource (clip);
-		AudioClipList[IndexCount] = null;
+		var first = AudioClipList.FirstOrDefault(item => item != null);
+		var hasMore = AudioClipList.Any(item => item != null);
+
+		if (first != null) {
+			AudioClipList[IndexCount] = null;
+
+			IndexCount ++;
+			source.Stop ();
+			SendToAudioSource (first);
+		}
+
+		if (!hasMore){
+			Initialize ();
+		}
 	}
 
 	void Initialize()

@@ -13,10 +13,8 @@ public class BombScript : MonoBehaviour
 	{
 		float time = Time.deltaTime;
 
-		if (canDefuse && Input.GetKey (KeyCode.E)) {
-//			AudioSource.PlayClipAtPoint(beep, transform.position);
-
-			SceneManager.LoadScene ("YouWin");
+		if (canDefuse && Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
+			StartCoroutine(Defusing());
 		}
 	}
 
@@ -40,5 +38,14 @@ public class BombScript : MonoBehaviour
 	private bool defuseBomb (bool trigger)
 	{
 		return trigger;
+	}
+
+	IEnumerator Defusing()
+	{
+		AudioSource.PlayClipAtPoint(beep, transform.position);
+
+		yield return new WaitForSeconds (5);
+
+		SceneManager.LoadScene ("YouWin");
 	}
 }

@@ -8,17 +8,12 @@ public class GameControllerScript : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject[] doors = GameObject.FindGameObjectsWithTag ("PortaSala");
+		GameObject[] places = GameObject.FindGameObjectsWithTag ("Empty");
 
-		foreach (GameObject obj in doors) {
-			var child = obj.transform.parent.
-				transform.Cast<Transform> ().Where (c => c.gameObject.tag == "Empty").First ();
+		var child = places [Random.Range (0, places.Length)];
 
-			if (child != null) {
-				Instantiate (prefabBomb, child.transform.position, child.transform.rotation);
-				break;
-			}
-		}
+		if (child != null)
+			Instantiate (prefabBomb, child.transform.position, child.transform.rotation);
 	}
 
 	void Update ()

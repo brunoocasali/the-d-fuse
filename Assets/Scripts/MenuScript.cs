@@ -42,7 +42,9 @@ public class MenuScript : MonoBehaviour
 	private void FirstMessage()
 	{
 		var clip = KeyboardAudioList [0];
-		SendToAudioSource(clip);
+
+		if (clip != null)
+			SendToAudioSource(clip);
 	}
 
 	private void LastMessage()
